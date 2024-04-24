@@ -8,6 +8,7 @@ services:
     environment:
       - DATABASE_URL
       - JWT_KEY
+      - PORT
     ports:
       - "4000:4000"
 
