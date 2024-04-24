@@ -1,0 +1,30 @@
+version: "3.8"
+services:
+  app:
+    container_name: backend
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+      - DATABASE_URL
+      - JWT_KEY
+    ports:
+      - "4000:4000"
+
+  redis:
+    image: docker.io/library/redis
+    container_name: cache
+    ports:
+      - 8353:6379
+    expose:
+      - 6379
+  rabbitmq:
+    image: docker.io/library/rabbitmq:3.12-management-alpine
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER
+      - RABBITMQ_DEFAULT_PASS
+volumes:
+  rabbit-data:
